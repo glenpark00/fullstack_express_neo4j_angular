@@ -1,0 +1,10 @@
+<span class='results-length' *ngIf='results.length > 0'>{{ results.length }} results</span>
+<div class='results-none'  *ngIf='results.length === 0'>
+  We couldn't find anything with those parameters.
+</div>
+<ul class='results-container'>
+  <li *ngFor='let res of results' (click)='handleClick(res)'>
+    <h3>{{ res.name }}</h3>
+    <span>${{ res.price }}</span>
+  </li>
+</ul>

@@ -1,0 +1,43 @@
+:host {
+  width: 60%;
+  height: calc(100vh - 100px);
+  background-color: #163163;
+  border-radius: 2px;
+  display: flex;
+  flex-direction: column;
+}
+
+.results-container {
+  height: 100%;
+  overflow: auto;
+}
+
+.results-container > li {
+  background-color: #eeeeee;
+  height: 90px;
+  margin: 12px 16px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.results-container::-webkit-scrollbar {
+  display: hidden;
+  background-color: transparent;
+  width: 8px;
+}
+
+.results-container::-webkit-scrollbar-thumb {
+  background-color: rgba(230, 230, 230, 0.438);
+  border: 0.2px solid rgba(126, 126, 126, 0.6);
+  border-radius: 5px;
+}
+
+.results-length {
+  color: white;
+  padding: 30px 16px;
+}
+
+.results-none {
+  color: white;
+  padding: 30px 16px;
+}

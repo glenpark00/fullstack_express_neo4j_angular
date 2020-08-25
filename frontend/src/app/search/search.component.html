@@ -1,0 +1,9 @@
+<div class='nav-bar'>
+  <input type='text' [value]='fragment' (input)='handleChange($event.target.value)' >
+</div>
+<div class='main-content-container'>
+  <div class='main-content'>
+    <app-results [results]=results></app-results>
+    <app-display></app-display>
+  </div>
+</div>
