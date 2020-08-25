@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node app.js",
     "server": "nodemon app.js",
-    "webpack": "npx webpack --watch"
+    "webpack": "npx webpack --watch",
+    "heroku-postbuild": "ng build --aot -prod"
   },
   "author": "",
   "license": "ISC",
