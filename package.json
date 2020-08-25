@@ -7,7 +7,7 @@
     "start": "node app.js",
     "server": "nodemon app.js",
     "webpack": "npx webpack --watch",
-    "heroku-postbuild": "cd frontend && npm install && ng build --aot -prod"
+    "heroku-postbuild": "cd frontend && npm install && ng build --prod"
   },
   "author": "",
   "license": "ISC",
