@@ -12,16 +12,12 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@angular/cli": "^10.0.7",
-    "@angular/compiler-cli": "^10.0.12",
     "nodemon": "^2.0.4",
     "typescript": "^3.9.7",
     "webpack": "^4.44.1",
     "webpack-cli": "^3.3.12"
   },
   "dependencies": {
-    "@angular/cli": "^10.0.7",
-    "@angular/compiler-cli": "^10.0.12",
     "apoc": "^2.1.6",
     "cors": "^2.8.5",
     "express": "^4.17.1",
