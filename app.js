@@ -17,7 +17,7 @@ app.use(express.static(__dirname + '/dist'));
 
 app.get('*', function(req, res) {
   console.log(__dirname);
-  res.sendFile(path.join(__dirname + '/dist/index.html'))
+  res.sendFile(path.join(__dirname + '/frontend/dist/index.html'))
 })
 
 app.use('/api/listings', listings);
