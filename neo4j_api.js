@@ -46,7 +46,7 @@ exports.populateListings = async () => {
   let session = driver.session();
   // MERGE ensures node being created is unique
   const listings = await session.run(
-    'USING PERIODIC COMMIT 500 LOAD CSV WITH HEADERS FROM "https://small-project-assets.s3-us-west-1.amazonaws.com/datasets/oakland_airbnb/listings.csv" AS data WITH data LIMIT 100 MERGE (l: Listing {id: data.id, name: data.name, hostName: data.host_name, roomType: data.room_type, price: data.price, numReviews: data.number_of_reviews})');
+    'USING PERIODIC COMMIT 500 LOAD CSV WITH HEADERS FROM "https://small-project-assets.s3-us-west-1.amazonaws.com/datasets/oakland_airbnb/listings.csv" AS data MERGE (l: Listing {id: data.id, name: data.name, hostName: data.host_name, roomType: data.room_type, price: data.price, numReviews: data.number_of_reviews})');
   session.close();
 }
 
