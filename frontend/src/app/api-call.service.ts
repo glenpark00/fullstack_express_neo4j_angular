@@ -6,7 +6,7 @@ import axios from "axios";
 })
 export class ApiCallService {
   private url = 'http://oakland-airbnb.herokuapp.com/';
-  // private url = 'http:?/localhost:5000';
+  // private url = 'http://localhost:5000';
 
   constructor() {
   }
@@ -16,6 +16,7 @@ export class ApiCallService {
       method: 'get',
       url: `${this.url}/api/listings/`
     }).then(res => {
+      console.log(res)
       return (res.data.records ? res.data.records.map(listing => listing._fields[0].properties) : [])
     })
   }
