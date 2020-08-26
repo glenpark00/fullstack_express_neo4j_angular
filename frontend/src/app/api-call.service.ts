@@ -36,12 +36,23 @@ export class ApiCallService {
 
   seedData = () => {
     return axios({
-      method: 'get',
+      method: 'post',
       url: `${this.url}/api/listings/seed`,
     })
       .then(res => {
         console.log('Database seeded')
       })
-      .catch(err => console.log(err))
+      .catch(err => console.log('Something went wrong in the seed axios call'))
+  }
+
+  dropData = () => {
+    return axios({
+      method: 'delete',
+      url: `${this.url}/api/listings/`,
+    })
+      .then(res => {
+        console.log('Database dropped')
+      })
+      .catch(err => console.log('Something went wrong in the delete axios call'))
   }
 }

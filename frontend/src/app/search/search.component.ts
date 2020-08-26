@@ -39,7 +39,13 @@ export class SearchComponent implements OnInit {
 
   seedDb() {
     this.api.seedData()
-      .then(() => console.log('Success'))
+      .then(() => console.log('Successly seeded'))
+      .catch(err => console.log(err))
+  }
+
+  dropDb() {
+    this.api.seedData()
+      .then(() => console.log('Successly dropped'))
       .catch(err => console.log(err))
   }
 }

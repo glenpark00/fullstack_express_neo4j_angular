@@ -34,9 +34,14 @@ router.post('/', async function (req, res) {
 
 router.post('/seed', async function(req, res) {
   let listings = await neo4jCalls.populateListings().then(() => {
-    neo4jCalls.populateReviews()
+    neo4jCalls.populateReviews();
   })
-  res.status(200).send("Database seeded")
+    .then(() => {
+      res.status(200).send("Database seeded")
+    })
+    .catch(err => {
+      console.log(err);
+    })
 })
 
 router.delete('/drop', async function (req, res) {

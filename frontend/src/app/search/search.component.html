@@ -1,6 +1,10 @@
 <div class='nav-bar'>
   <input type='text' [value]='fragment' (input)='handleChange($event.target.value)' >
-  <button (click)='seedDb()'>Seed database</button>
+  <!-- <button (click)='seedDb()'>Seed database</button>
+  <button (click)='dropDb()'>Drop database</button> -->
+  <select>
+    <option value=""></option>
+  </select>
 </div>
 <div class='main-content-container'>
   <div class='main-content'>
