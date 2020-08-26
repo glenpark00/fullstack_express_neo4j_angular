@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
 import axios from "axios";
-import { AxiosInstance } from "axios";
-import creds from '../../../config/credentials';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +16,7 @@ export class ApiCallService {
       method: 'get',
       url: `${this.url}/api/listings/`
     }).then(res => {
-      return res.data.records.map(listing => listing._fields[0].properties);
+      return (res.data.records ? res.data.records.map(listing => listing._fields[0].properties) : [])
     })
   }
 
@@ -27,7 +25,7 @@ export class ApiCallService {
       method: 'get',
       url: `${this.url}/api/listings/search/${fragment}`,
     }).then(res => {
-      return res.data.records.map(listing => listing._fields[0].properties);
+      return (res.data.records ? res.data.records.map(listing => listing._fields[0].properties) : [])
     })
   }
 }
