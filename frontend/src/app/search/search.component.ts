@@ -8,44 +8,64 @@ import { ApiCallService } from '../api-call.service';
 })
 export class SearchComponent implements OnInit {
   fragment: string = '';
-
+  roomType: string = 'Any';
+  priceLow: number = 0;
+  priceHigh: number = 999999;
   results: object[] = [];
 
+  roomTypes: any[] = [];
+
   constructor(private api: ApiCallService) { 
+    
   }
 
   ngOnInit() {
-    this.api.getListings().then(res => this.results = res)
+    this.api.getListings()
+      .then(res => {
+        this.results = res;
+        this.roomTypes = [...new Set(res.map(listing => listing.roomType))];
+      })
       .catch(err => {
         console.log(err)
       });
   }
 
-  handleChange(fragment) {
+  handleNameChange(fragment) {
     this.fragment = fragment;
+    this.search();
+  }
 
-    if (fragment === '') {
-      this.api.getListings().then(res => this.results = res)
-        .catch(err => {
-          console.log(err)
-        });
+  handlePriceChange(number, type) {
+    if (type === 'low') {
+      this.priceLow = number;
     } else {
-      this.api.searchListings(fragment).then(res => this.results = res)
-        .catch(err => {
-          console.log(err)
-        });
+      this.priceHigh = number;
     }
+    this.search();
+  }
+
+  handleRoomTypeChange(type) {
+    this.roomType = type;
+    this.search();
+  }
+
+  search() {
+    this.api.searchListings(this.fragment, this.priceLow, this.priceHigh, this.results)
+      .then(res => this.results = res)
+      .catch(err => {
+        console.log(err)
+      });
   }
 
   seedDb() {
     this.api.seedData()
-      .then(() => console.log('Successly seeded'))
+      .then(() => console.log('Successfully seeded'))
       .catch(err => console.log(err))
   }
 
   dropDb() {
     this.api.seedData()
-      .then(() => console.log('Successly dropped'))
+      .then(() => console.log('Successfully dropped'))
       .catch(err => console.log(err))
   }
 }

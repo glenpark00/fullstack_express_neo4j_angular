@@ -1,10 +1,16 @@
 <div class='nav-bar'>
-  <input type='text' [value]='fragment' (input)='handleChange($event.target.value)' >
-  <button (click)='seedDb()'>Seed database</button>
-  <button (click)='dropDb()'>Drop database</button>
-  <select>
-    <option value=""></option>
-  </select>
+  <input type='text' [value]='fragment' (input)='handleNameChange($event.target.value)' placeholder='Listing Name' >
+  <!-- <button (click)='seedDb()'>Seed database</button>
+  <button (click)='dropDb()'>Drop database</button> -->
+  <input type="number" [value]='priceLow' min='0' [max]='priceHigh' (input)='handlePriceChange($event.target.value, "low")'>
+  <input type="number" [value]='priceHigh' [min]='priceLow' max='999999' (input)='handlePriceChange($event.target.value, "high")'>
+  <label>
+    Room Type
+    <select [value]='roomType' (input)='handleRoomTypeChange($event.target.value)'>
+      <option value='Any' selected>Any</option>
+      <option *ngFor='let type of roomTypes' [value]='type'>{{ type }}</option>
+    </select>
+  </label>
 </div>
 <div class='main-content-container'>
   <div class='main-content'>

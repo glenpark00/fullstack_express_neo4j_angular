@@ -17,16 +17,20 @@ export class ApiCallService {
       url: `${this.url}/api/listings/`
     })
     .then(res => {
-      console.log(res)
       return (res.data.records ? res.data.records.map(listing => listing._fields[0].properties) : [])
     })
     .catch(err => console.log(err))
   }
 
-  searchListings = fragment => {
+  searchListings = (fragment, priceLow, priceHigh, roomType) => {
     return axios({
       method: 'get',
       url: `${this.url}/api/listings/search/${fragment}`,
+      data: {
+        priceLow,
+        priceHigh,
+        roomType
+      }
     })
     .then(res => {
       return (res.data.records ? res.data.records.map(listing => listing._fields[0].properties) : [])
