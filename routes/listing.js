@@ -9,10 +9,13 @@ const neo4jCalls = require('../neo4j_api');
 // })
 
 router.get('/', async function(req, res) {
-  let listings = await neo4jCalls.getListings().then(res => {
-    res.status(200).send(listings)  
+  let listings = await neo4jCalls.getListings().then(data => {
+    res.status(200).send(data);
   })
-  .catch(err => console.log(err))
+  .catch(err => {
+    console.log(err)
+    res.status(444).send(err);
+  })
   return listings;
 })
 
