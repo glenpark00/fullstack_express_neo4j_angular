@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import axios from 'axios';
+import { ApiCallService } from '../api-call.service';
 
 @Component({
   selector: 'app-search',
@@ -11,44 +11,26 @@ export class SearchComponent implements OnInit {
 
   results: object[] = [];
 
-  constructor() { 
+  constructor(private api: ApiCallService) { 
   }
 
   ngOnInit(): void {
-    axios({
-      method: 'get',
-      url: `http://localhost:5000/api/listings/`,
-      data: {
-      }
-    }).then(res => {
-      this.results = res.data.records.map(listing => listing._fields[0].properties);
-    })
+    this.api.getListings.then(res => this.results = res)
+      .catch(err => {
+        console.log(err)
+      });
   }
 
   handleChange(fragment) {
     this.fragment = fragment;
 
     if (fragment === '') {
-      axios({
-        method: 'get',
-        url: `http://localhost:5000/api/listings/`,
-        data: {
-        }
-      }).then(res => {
-        this.results = res.data.records.map(listing => listing._fields[0].properties);
-      })
+      this.api.getListings.then(res => this.results = res)
         .catch(err => {
           console.log(err)
         });
     } else {
-      axios({
-        method: 'get',
-        url: `http://localhost:5000/api/listings/search/${fragment}`,
-        data: {
-        }
-      }).then(res => {
-        this.results = res.data.records.map(listing => listing._fields[0].properties);
-      })
+      this.api.searchListings.then(res => this.results = res)
         .catch(err => {
           console.log(err)
         });
