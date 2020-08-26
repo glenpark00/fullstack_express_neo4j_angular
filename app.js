@@ -9,16 +9,15 @@ const listings = require('./routes/listing');
 
 app.use(cors())
 
-
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use(express.static(__dirname + '/frontend/dist'));
-
-app.get('*', function(req, res) {
-  console.log(__dirname);
-  res.sendFile(path.join(__dirname + '/frontend/dist/index.html'))
-})
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(__dirname + '/frontend/dist'));
+  app.get('*', function(req, res) {
+    res.sendFile(path.join(__dirname + '/frontend/dist/index.html'))
+  })
+} 
 
 app.use('/api/listings', listings);
 

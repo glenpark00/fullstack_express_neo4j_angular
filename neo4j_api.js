@@ -1,7 +1,7 @@
 const neo4j = require('neo4j-driver');
 const creds = require('./config/credentials');
 
-const driver = new neo4j.driver('bolt://localhost:7687', neo4j.auth.basic(creds['neo4jusername'], creds['neo4jpw']));
+const driver = new neo4j.driver(creds['url'], neo4j.auth.basic(creds['neo4jusername'], creds['neo4jpw']));
 
 // exports.getListing = async id => {
 //   let session = driver.session();
