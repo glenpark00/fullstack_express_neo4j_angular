@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import axios from 'axios';
+import creds from '../../../config/credentials';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class ApiCallService {
   getListings = () => {
     axios({
       method: 'get',
-      url: `http://localhost:5000/api/listings/`,
+      url: `${creds.url}/api/listings/`,
       data: {
       }
     }).then(res => {
@@ -22,7 +23,7 @@ export class ApiCallService {
   searchListings = fragment => {
     axios({
       method: 'get',
-      url: `http://localhost:5000/api/listings/search/${fragment}`,
+      url: `${creds.url}/api/listings/search/${fragment}`,
       data: {
       }
     }).then(res => {
