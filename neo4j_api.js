@@ -34,12 +34,12 @@ exports.searchListings = async (fragment, priceLow, priceHigh, roomType) => {
     conditions.push('l.roomType = $roomType');
   }
 
-  conditions.push(`l.price >= ${priceLow.toInteger()} AND l.price <= ${priceHigh.toInteger()}`);
+  conditions.push('l.price >= $priceLow AND l.price <= $priceHigh');
 
   cypher += conditions.join(' AND ')
   cypher += ' RETURN l'
   
-  const listings = await session.run(cypher, { fragment, priceLow, priceHigh, roomType });
+  const listings = await session.run(cypher, { fragment, priceLow: parseInt(priceLow), priceHigh: parseInt(priceLow), roomType });
   session.close();
   return listings;
 }
