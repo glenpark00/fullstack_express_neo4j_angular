@@ -5,7 +5,7 @@ import axios from "axios";
   providedIn: 'root'
 })
 export class ApiCallService {
-  private url = 'http://oakland-airbnb.herokuapp.com/';
+  private url = 'http://oakland-airbnb.herokuapp.com';
   // private url = 'http://localhost:5000';
 
   constructor() {
