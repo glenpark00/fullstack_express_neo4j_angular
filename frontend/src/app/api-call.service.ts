@@ -10,18 +10,19 @@ export class ApiCallService {
   constructor() { }
 
   getListings = () => {
-    axios({
+    return axios({
       method: 'get',
       url: `${creds.url}/api/listings/`,
       data: {
-      }
+      },
+      headers: { 'Access-Control-Allow-Origin': '*' }
     }).then(res => {
       return res.data.records.map(listing => listing._fields[0].properties);
     })
   }
 
   searchListings = fragment => {
-    axios({
+    return axios({
       method: 'get',
       url: `${creds.url}/api/listings/search/${fragment}`,
       data: {

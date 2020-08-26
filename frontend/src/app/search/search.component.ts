@@ -14,7 +14,7 @@ export class SearchComponent implements OnInit {
   constructor(private api: ApiCallService) { 
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.api.getListings().then(res => this.results = res)
       .catch(err => {
         console.log(err)
