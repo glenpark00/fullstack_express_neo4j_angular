@@ -53,9 +53,16 @@ exports.populateListings = async () => {
 exports.populateReviews = async () => {
   let session = driver.session();
   const reviews = await session.run(
-    'USING PERIODIC COMMIT 500 LOAD CSV WITH HEADERS FROM "https://small-project-assets.s3-us-west-1.amazonaws.com/datasets/oakland_airbnb/reviews.csv" AS data MATCH (l:Listing) WHERE l.id = data.listing_id WITH count(l) as numNodes WHERE numNodes = 1 MERGE (r: Review {listingId: data.listing_id, date: data.date}) CREATE (l)-[rel:HAS]->(r)');
+    'USING PERIODIC COMMIT 500 LOAD CSV WITH HEADERS FROM "file:///reviews.csv" AS data MERGE (r: Review {listingId: data.listing_id, date: data.date}) WITH r MATCH (l:Listing) WHERE l.id = r.listingId CREATE (l)-[rel:HAS]->(r)');
   session.close();
 }
+
+// exports.populateReviews = async () => {
+//   let session = driver.session();
+//   const reviews = await session.run(
+//     'USING PERIODIC COMMIT 500 LOAD CSV WITH HEADERS FROM "https://small-project-assets.s3-us-west-1.amazonaws.com/datasets/oakland_airbnb/reviews.csv" AS data MATCH (l:Listing) WHERE l.id = data.listing_id WITH count(l) as numNodes WHERE numNodes = 1 MERGE (r: Review {listingId: data.listing_id, date: data.date}) CREATE (l)-[rel:HAS]->(r)');
+//   session.close();
+// }
 
 // exports.populateRelationships = async () => {
 //   let session = driver.session();
