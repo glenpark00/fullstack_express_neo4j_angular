@@ -12,14 +12,12 @@ app.use(cors({ credentials: true, origin: true }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(__dirname + '/frontend/dist'));
-  app.get('*', function(req, res) {
-    res.sendFile(path.join(__dirname + '/frontend/dist/index.html'))
-  })
-} 
+app.use('api/listings', listings);
 
-app.use('/api/listings', listings);
+app.use(express.static(__dirname + '/frontend/dist'));
+app.get('*', function(req, res) {
+  res.sendFile(path.join(__dirname + '/frontend/dist/index.html'))
+})
 
 app.use(function (req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
@@ -29,7 +27,6 @@ app.use(function (req, res, next) {
   );
   next();
 });
-
 
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);
