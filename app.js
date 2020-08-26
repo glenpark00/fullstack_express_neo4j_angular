@@ -13,7 +13,7 @@ app.use(cors())
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use(express.static(__dirname + '/dist'));
+app.use(express.static(__dirname + '/frontend/dist'));
 
 app.get('*', function(req, res) {
   console.log(__dirname);
