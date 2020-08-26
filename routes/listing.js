@@ -20,7 +20,8 @@ router.get('/', async function(req, res) {
 })
 
 router.get('/search/:fragment', async function(req, res) {
-  let listings = await neo4jCalls.searchListings(req.params.fragment);
+  const { priceLow, priceHigh, roomType } = req.body;
+  let listings = await neo4jCalls.searchListings(req.params.fragment, priceLow, priceHigh, roomType);
   res.status(200).send(listings)
   return listings;
 })

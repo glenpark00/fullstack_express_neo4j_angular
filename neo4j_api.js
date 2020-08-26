@@ -21,9 +21,25 @@ exports.getListings = async () => {
   return listings;
 }
 
-exports.searchListings = async fragment => {
+exports.searchListings = async (fragment, priceLow, priceHigh, roomType) => {
   let session = driver.session();
-  const listings = await session.run('MATCH (l:Listing) WHERE l.name CONTAINS $fragment RETURN l', { fragment });
+  let cypher = 'MATCH (l:Listing) WHERE ';
+  let conditions = [];
+
+  if (fragment !== '') {
+    conditions.push('l.name CONTAINS $fragment');
+  }
+
+  if (roomType !== 'Any') {
+    conditions.push('l.roomType = $roomType');
+  }
+
+  conditions.push(`l.price >= ${priceLow.toInteger()} AND l.price <= ${priceHigh.toInteger()}`);
+
+  cypher += conditions.join(' AND ')
+  cypher += ' RETURN l'
+  
+  const listings = await session.run(cypher, { fragment, priceLow, priceHigh, roomType });
   session.close();
   return listings;
 }
