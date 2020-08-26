@@ -7,39 +7,25 @@ import creds from '../../../config/credentials';
   providedIn: 'root'
 })
 export class ApiCallService {
-  private axiosClient: AxiosInstance;
+  private url = 'http://oakland-airbnb.herokuapp.com/';
+  // private url = 'http:?/localhost:5000';
 
   constructor() {
-    this.axiosClient = axios.create({
-      timeout: 3000,
-      headers: {
-        "X-Initialized-At": Date.now().toString()
-      }
-    });
   }
 
-  // getListings = () => {
-  //   return axios({
-  //     method: 'get',
-  //     url: `${creds.url}/api/listings/`,
-  //   }).then(res => {
-  //     return res.data.records.map(listing => listing._fields[0].properties);
-  //   })
-  // }
-
   getListings = async () => {
-    let axiosResponse = await this.axiosClient.request({
-      method: "get",
-      url: `${creds.url}/api/listings/`
-    });
-
-    return (axiosResponse.data);
+    return axios({
+      method: 'get',
+      url: `${this.url}/api/listings/`
+    }).then(res => {
+      return res.data.records.map(listing => listing._fields[0].properties);
+    })
   }
 
   searchListings = fragment => {
     return axios({
       method: 'get',
-      url: `${creds.url}/api/listings/search/${fragment}`,
+      url: `${this.url}/api/listings/search/${fragment}`,
     }).then(res => {
       return res.data.records.map(listing => listing._fields[0].properties);
     })
