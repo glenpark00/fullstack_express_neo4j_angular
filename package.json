@@ -23,7 +23,7 @@
     "apoc": "^2.1.6",
     "cors": "^2.8.5",
     "express": "^4.17.1",
-    "neo4j-driver": "^4.1.1"
+    "neo4j-driver": "4.0.1"
   },
   "engines": {
     "node": "13.12.0",
