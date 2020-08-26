@@ -15,7 +15,7 @@ export class SearchComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.api.getListings.then(res => this.results = res)
+    this.api.getListings().then(res => this.results = res)
       .catch(err => {
         console.log(err)
       });
@@ -25,12 +25,12 @@ export class SearchComponent implements OnInit {
     this.fragment = fragment;
 
     if (fragment === '') {
-      this.api.getListings.then(res => this.results = res)
+      this.api.getListings().then(res => this.results = res)
         .catch(err => {
           console.log(err)
         });
     } else {
-      this.api.searchListings.then(res => this.results = res)
+      this.api.searchListings(fragment).then(res => this.results = res)
         .catch(err => {
           console.log(err)
         });
