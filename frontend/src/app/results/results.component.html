@@ -1,5 +1,5 @@
-<span class='results-length' *ngIf='results.length > 0'>{{ results.length }} results</span>
-<div class='results-none'  *ngIf='results.length === 0'>
+<span class='results-length' *ngIf='results && results.length > 0'>{{ results.length }} results</span>
+<div class='results-none'  *ngIf='results && results.length === 0'>
   We couldn't find anything with those parameters.
 </div>
 <ul class='results-container'>
