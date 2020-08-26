@@ -3,6 +3,8 @@ const creds = require('./config/credentials');
 
 const driver = new neo4j.driver(creds['url'], neo4j.auth.basic(creds['neo4jusername'], creds['neo4jpw']), { encrypted: true });
 
+driver.onError = err => { console.log(err) }
+
 // exports.getListing = async id => {
 //   let session = driver.session();
 //   const listing = await session.run('MATCH (l:Listing) WHERE ID(l) = $id  RETURN l', { id: parseInt(id) });
