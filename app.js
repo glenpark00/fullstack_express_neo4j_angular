@@ -12,10 +12,10 @@ app.use(cors({ credentials: true, origin: true }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use('api/listings', listings);
+app.use('/api/listings', listings);
 
 app.use(express.static(__dirname + '/frontend/dist'));
-app.get('*', function(req, res) {
+app.get('/', function(req, res) {
   res.sendFile(path.join(__dirname + '/frontend/dist/index.html'))
 })
 
