@@ -33,4 +33,15 @@ export class ApiCallService {
     })
     .catch(err => console.log(err))
   }
+
+  seedData = () => {
+    return axios({
+      method: 'get',
+      url: `${this.url}/api/listings/seed`,
+    })
+      .then(res => {
+        console.log('Database seeded')
+      })
+      .catch(err => console.log(err))
+  }
 }

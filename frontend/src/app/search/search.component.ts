@@ -36,4 +36,10 @@ export class SearchComponent implements OnInit {
         });
     }
   }
+
+  seedDb() {
+    this.api.seedData()
+      .then(() => console.log('Success'))
+      .catch(err => console.log(err))
+  }
 }
