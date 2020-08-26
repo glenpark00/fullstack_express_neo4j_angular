@@ -5,5 +5,29 @@
 }
 
 .listing-display {
-  
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
+}
+
+.listing-display > div {
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+}
+
+.listing-name {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+span {
+  margin-right: 15px;
+}
+
+.listing-display > div > div:last-child {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }

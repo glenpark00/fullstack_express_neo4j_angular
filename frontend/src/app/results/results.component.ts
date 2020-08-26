@@ -15,6 +15,7 @@ export class ResultsComponent implements OnInit {
 
   handleClick(listing) {
     document.querySelector('.listing-none').innerHTML = '';
+    document.querySelector<HTMLElement>('.listing-display > div').style.border = '1px solid #929292';
 
     const name = document.querySelector('.listing-name'),
       hostName = document.querySelector('.listing-host-name'),
@@ -23,9 +24,10 @@ export class ResultsComponent implements OnInit {
       numReviews = document.querySelector('.listing-reviews')
 
     name.innerHTML = listing.name;
-    hostName.innerHTML = listing.hostName;
-    roomType.innerHTML = listing.roomType;
+    hostName.innerHTML = 'Host:' + listing.hostName;
+    roomType.innerHTML = 'Type:' + listing.roomType;
     price.innerHTML = '$' + listing.price;
-    numReviews.innerHTML = listing.numReviews;
+    numReviews.innerHTML = 'Number of Reviews:' + listing.numReviews;
+    
   }  
 }
