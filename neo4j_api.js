@@ -1,10 +1,9 @@
 const neo4j = require('neo4j-driver');
 const creds = require('./config/credentials');
 
-const driver = new neo4j.driver(creds['url'], neo4j.auth.basic(creds['neo4jusername'], creds['neo4jpw']), { encrypted: true });
+const driver = new neo4j.driver(creds['url'], neo4j.auth.basic(creds['neo4jusername'], creds['neo4jpw']), { encrypted: false });
 
 driver.onError = err => { console.log(err) }
-
 // exports.getListing = async id => {
 //   let session = driver.session();
 //   const listing = await session.run('MATCH (l:Listing) WHERE ID(l) = $id  RETURN l', { id: parseInt(id) });
@@ -21,35 +20,38 @@ exports.getListings = async () => {
   return listings;
 }
 
-exports.searchListings = async (fragment, priceLow, priceHigh, roomType) => {
-  let session = driver.session();
-  const listings = await session.run('MATCH (l:Listing) WHERE l.name CONTAINS $fragment RETURN l', { fragment });
-  session.close();
-  return listings;
-}
-
 // exports.searchListings = async (fragment, priceLow, priceHigh, roomType) => {
 //   let session = driver.session();
-//   let cypher = 'MATCH (l:Listing) WHERE ';
-//   let conditions = [];
-
-//   if (fragment !== '') {
-//     conditions.push('l.name CONTAINS $fragment');
-//   }
-
-//   if (roomType !== 'Any') {
-//     conditions.push('l.roomType = $roomType');
-//   }
-
-//   conditions.push('l.price >= $priceLow AND l.price <= $priceHigh');
-
-//   cypher += conditions.join(' AND ')
-//   cypher += ' RETURN l'
-  
-//   const listings = await session.run(cypher, { fragment, priceLow: parseInt(priceLow), priceHigh: parseInt(priceHigh), roomType });
+//   const listings = await session.run('MATCH (l:Listing) WHERE l.name CONTAINS $fragment RETURN l', { fragment });
 //   session.close();
 //   return listings;
 // }
+
+exports.searchListings = async (fragment, priceLow, priceHigh, roomType) => {
+  let session = driver.session();
+  let cypher = 'MATCH (l:Listing) WHERE ';
+  let conditions = [];
+
+  if (fragment !== '') {
+    conditions.push('l.name CONTAINS $fragment');
+  }
+
+  if (roomType !== 'Any') {
+    conditions.push('l.roomType = $roomType');
+  }
+
+  conditions.push('l.price >= $priceLow AND l.price <= $priceHigh');
+
+  cypher += conditions.join(' AND ');
+  cypher += ' RETURN l';
+
+  console.log(cypher)
+  
+  const listings = await session.run(cypher, { fragment, priceLow: parseInt(priceLow), priceHigh: parseInt(priceHigh), roomType });
+  session.close();
+  console.log(listings)
+  return listings;
+}
 
 exports.createListing = async (details) => {
   let session = driver.session();

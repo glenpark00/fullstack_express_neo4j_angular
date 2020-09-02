@@ -50,7 +50,7 @@ export class SearchComponent implements OnInit {
   }
 
   search() {
-    this.api.searchListings(this.fragment, this.priceLow, this.priceHigh, this.results)
+    this.api.searchListings(this.fragment, this.priceLow, this.priceHigh, this.roomType)
       .then(res => this.results = res)
       .catch(err => {
         console.log(err)
