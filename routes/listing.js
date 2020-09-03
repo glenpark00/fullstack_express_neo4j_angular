@@ -26,12 +26,12 @@ router.get('/search/:fragment', async function(req, res) {
   return listings;
 })
 
-router.post('/', async function (req, res) {
-  // console.log(req.body)
-  let listing = await neo4jCalls.createListing(req.body);
-  res.status(200).send("Listing named " + listing + " created")
-  return 700000;
-})
+// router.post('/', async function (req, res) {
+//   // console.log(req.body)
+//   let listing = await neo4jCalls.createListing(req.body);
+//   res.status(200).send("Listing named " + listing + " created")
+//   return 700000;
+// })
 
 router.post('/seed', async function(req, res) {
   let listings = await neo4jCalls.populateListings().then(() => {

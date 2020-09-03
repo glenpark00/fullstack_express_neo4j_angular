@@ -53,19 +53,19 @@ exports.searchListings = async (fragment, priceLow, priceHigh, roomType) => {
   return listings;
 }
 
-exports.createListing = async (details) => {
-  let session = driver.session();
-  let listing = "No Listing Was Created";
-  try {
-    listing = await session.run('MERGE (n:Listing {name: $name, hostName: $hostName, neighborhood: $neighborhood, roomType: $roomType, price: $price}) RETURN n', details);
-    // console.log(listing.records[0].get(0).properties.name)
-  }
-  catch (err) {
-    console.error(err);
-    return listing;
-  }
-  return listing.records[0].get(0).properties.name;
-}
+// exports.createListing = async (details) => {
+//   let session = driver.session();
+//   let listing = "No Listing Was Created";
+//   try {
+//     listing = await session.run('MERGE (n:Listing {name: $name, hostName: $hostName, neighborhood: $neighborhood, roomType: $roomType, price: $price}) RETURN n', details);
+//     // console.log(listing.records[0].get(0).properties.name)
+//   }
+//   catch (err) {
+//     console.error(err);
+//     return listing;
+//   }
+//   return listing.records[0].get(0).properties.name;
+// }
 
 exports.populateListings = async () => {
   let session = driver.session();
